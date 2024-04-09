@@ -12,6 +12,8 @@ document.getElementById("go-btn").addEventListener("click", goBtnClicked);
 
 // Process Go Button Click
 function goBtnClicked() {
+  outputEl.innerHTML = "";
+
   // Get Menu Selection
   let selection = document.getElementById("menu-select").value;
 
@@ -32,22 +34,43 @@ function goBtnClicked() {
 // MENU FUNCTIONS
 function allColors() {
   // Display Name and Family of All Colors
-  outputEl.innerHTML = "<h3>Display All Colors</h3>";
+  for (let i = 0; i < colorData.length; i++) {
+    outputEl.innerHTML += `<h3>${colorData[i].name}: ${colorData[i].family} </h3>`;
+  }
 }
 
 function brightColors() {
-  // Display Name and Brightness of All Colors with a Brightness of 200 and Higher
-  outputEl.innerHTML = "<h3>Display Bright Colors</h3>";
+  for (let i = 0; i < colorData.length; i++) {
+    if (colorData[i]["brightness"] >= 200) {
+      outputEl.innerHTML += `<h3>${colorData[i].name}: ${colorData[i].brightness}<h3>`;
+    }
+  }
 }
+// Display Name and Brightness of All Colors with a Brightness of 200 and Higher
 
 function redPinkFamilies() {
+  let count = 0;
+  for (let i = 0; i < colorData.length; i++) {
+    if (colorData[i]["family"] == "Red" || colorData[i]["family"] == "Pink") {
+      count++;
+    }
+  }
+  outputEl.innerHTML = `<h3>Count Red/Pink Family Colors : ${count}</h3>`;
+
   // Count Colors in Red/Pink Families
-  outputEl.innerHTML = "<h3>Count Red/Pink Family Colors</h3>";
 }
 
 function familySearch() {
+  let input = prompt("provide family name");
+  let count = 0;
+  for (let i = 0; i < colorData.length; i++) {
+    if (colorData[i]["family"] == input) {
+      count++;
+      outputEl.innerHTML += `<h3> ${colorData[i]["name"]}: ${colorData[i]["family"]}</h3>`;
+    }
+  }
   // Display Name and Family of all Colors that Match a User Provided Family Name. Also Output a Count of Colors Found.
-  outputEl.innerHTML = "<h3>Family Search</h3>";
+  outputEl.innerHTML += `<h1>Total Matches: ${count}</h1>`;
 }
 
 function startLetterSearch() {
