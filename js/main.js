@@ -5,7 +5,7 @@ let outputEl = document.getElementById("output");
 
 // Load Color Data
 let colorData = await readJSON("data/color-data.json");
-console.log(colorData); // Verify Color Data
+console.log(colorData[0]); // Verify Color Data
 
 // Event Listener on Go Button
 document.getElementById("go-btn").addEventListener("click", goBtnClicked);
@@ -74,6 +74,15 @@ function familySearch() {
 }
 
 function startLetterSearch() {
+  let input = prompt("Provide starting letter");
+  let count = 0;
+  console.log(input);
+  for (let i = 0; i < colorData.length; i++) {
+    if (colorData[i].name.charAt(0) == input.toUpperCase()) {
+      count++;
+      outputEl.innerHTML += `<h3>${colorData[i].name}</h3>`;
+    }
+  }
   // Display Name of all Colors that Match a User Provided Starting Letter. Also Output a Count of Colors Found.
-  outputEl.innerHTML = "<h3>Start Letter Search</h3>";
+  outputEl.innerHTML += `<h1>Total Matches:${count}</h1>`;
 }
